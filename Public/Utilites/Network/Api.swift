@@ -135,7 +135,7 @@ enum Api {
                 url: uncompletedUrl + NetworkDefaults.SERVER_ROUTE + "?access_token=token&act=baseconf&op=get_pic_cofn",
                 params: [
                     "bc_uses_type"  : 1,
-                    "bc_type"       : 1
+                    "bc_type"       : 3
                 ],
                 data: [],
                 name: "获取轮播图路径"

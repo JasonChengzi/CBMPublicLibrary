@@ -68,7 +68,7 @@ class Log {
     ///带时间的字符串
     class func logString(message : String?) {
         #if DEBUG
-            print("==========\(NSDate().toStandardString)==========\n\(message ?? "nil message.")")
+            print("==========\(NSDate().toStandardString)==========\n\(message ?? "nil message.")\n")
         #endif
     }
     ///输出值
@@ -84,7 +84,7 @@ class Log {
     ///带时间的值
     class func logValue<T>(value : T) {
         #if DEBUG
-            print("==========\(NSDate().toStandardString)==========\n\(value)")
+            print("==========\(NSDate().toStandardString)==========\n\(value)\n")
         #endif
     }
 }

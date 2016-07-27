@@ -64,4 +64,10 @@ extension Array {
         }
         return (parameters, questionMarks)
     }
+    
+    mutating func remove<T where T : Equatable>(element : T) {
+        self = self.filter({
+            $0 as? T != element
+        })
+    }
 }

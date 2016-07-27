@@ -61,7 +61,7 @@ enum MJAlertViewStyle {
         case .Info:
             return UIColor.whiteColor()
         case .SubjectTheme:
-//            return UIColor.whiteColor()
+            //            return UIColor.whiteColor()
             if self.backgroundColor.isLight {
                 return UIColor.blackColor()
             } else {
@@ -96,22 +96,22 @@ extension UIView {
             let height = MJAV_Height_Label
             let width = CGFloat.max
             let notifierRect = text.toNSString.boundingRectWithSize(
-                                                    CGSize(
-                                                        width: width,
-                                                        height: height
-                                                    ),
-                                                    options: NSStringDrawingOptions.UsesLineFragmentOrigin,
-                                                    attributes: attributes,
-                                                    context: nil
-                                                )
+                CGSize(
+                    width: width,
+                    height: height
+                ),
+                options: NSStringDrawingOptions.UsesLineFragmentOrigin,
+                attributes: attributes,
+                context: nil
+            )
             let notifierWidth = CGFloat.MIN(lbs: CGRectGetWidth(notifierRect) + MJAV_xPadding.double, rbs: MJAV_Width_Max)
             let xOffset = (CGRectGetWidth(screenBounds) - notifierWidth).half
             
             let notifierHeight = MJAV_Height_Label
             
-//            if !shouldDismiss {
-//                notifierHeight += (MJAV_Height_Cancel_Button + MJAV_Height_Separator)
-//            }
+            //            if !shouldDismiss {
+            //                notifierHeight += (MJAV_Height_Cancel_Button + MJAV_Height_Separator)
+            //            }
             
             let yOffset = CGRectGetHeight(screenBounds) - notifierHeight - MJAV_Height_FromBottom
             
@@ -148,7 +148,7 @@ extension UIView {
                         
                         let cancelButton = UIButton(type: UIButtonType.Custom)
                         cancelButton.frame = CGRect(x: 0, y: CGRectGetMaxY(separatorImageView.frame), width: CGRectGetWidth(view.frame), height: MJAV_Height_Cancel_Button)
-//                        cancelButton.setNormalTitleColor(UIColor.whiteColor())
+                        //                        cancelButton.setNormalTitleColor(UIColor.whiteColor())
                         cancelButton.backgroundColor = UIColor.colorWithHex(hex: 0x000000)
                         cancelButton.addTarget(self, action: #selector(UIView.buttonCancelClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
                         cancelButton.titleLabel?.font = MJAV_NOTIFIER_CANCEL_FONT
@@ -158,7 +158,7 @@ extension UIView {
                     UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseOut, animations: { 
                         view.alpha = 1
                         view.frame = finalFrame
-                    }, completion: nil)
+                        }, completion: nil)
                 })
                 
                 if shouldDismiss {
@@ -166,7 +166,7 @@ extension UIView {
                 }
             } else {
                 let notifierView = UIView(frame: CGRect(x: xOffset, y: CGRectGetHeight(screenBounds), width: notifierWidth, height: notifierHeight))
-//                notifierView.backgroundColor = UIColor.colorWithHex(hex: 0xF94137)
+                //                notifierView.backgroundColor = UIColor.colorWithHex(hex: 0xF94137)
                 notifierView.backgroundColor = type.backgroundColor
                 notifierView.tag = MJAV_Tag
                 notifierView.clipsToBounds = true
@@ -179,7 +179,8 @@ extension UIView {
                 textLabel.adjustsFontSizeToFitWidth = true
                 textLabel.backgroundColor = UIColor.clearColor()
                 textLabel.textAlignment = .Center
-//                textLabel.textColor = UIColor.colorWithHex(hex: 0xFFFFFF)
+                //                textLabel.textColor = UIColor.colorWithHex(hex: 0xFFFFFF)
+                textLabel.numberOfLines = 0
                 textLabel.textColor = type.textColor
                 textLabel.font = MJAV_NOTIFIER_LABEL_FONT
                 textLabel.minimumScaleFactor = 0.7
@@ -188,17 +189,17 @@ extension UIView {
                 
                 if shouldDismiss {
                     self.performSelector(#selector(UIView.dismissMJNotifier), withObject: nil, afterDelay: 2)
-//                } else {
-//                    let separatorImageView = UIImageView(frame: CGRect(x: 0, y: CGRectGetHeight(textLabel.frame), width: CGRectGetWidth(notifierView.frame), height: MJAV_Height_Separator))
-//                    separatorImageView.backgroundColor = UIColor.colorWithHex(hex: 0xF94137)
-//                    notifierView.addSubview(separatorImageView)
-//                    
-//                    let cancelButton = UIButton(type: UIButtonType.Custom)
-//                    cancelButton.frame = CGRect(x: 0, y: CGRectGetMaxY(separatorImageView.frame), width: CGRectGetWidth(notifierView.frame), height: MJAV_Height_Cancel_Button)
-//                    cancelButton.backgroundColor = UIColor.colorWithHex(hex: 0x000000)
-//                    cancelButton.addTarget(self, action: #selector(UIView.buttonCancelClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
-//                    cancelButton.titleLabel?.font = MJAV_NOTIFIER_CANCEL_FONT
-//                    notifierView.addSubview(cancelButton)
+                    //                } else {
+                    //                    let separatorImageView = UIImageView(frame: CGRect(x: 0, y: CGRectGetHeight(textLabel.frame), width: CGRectGetWidth(notifierView.frame), height: MJAV_Height_Separator))
+                    //                    separatorImageView.backgroundColor = UIColor.colorWithHex(hex: 0xF94137)
+                    //                    notifierView.addSubview(separatorImageView)
+                    //                    
+                    //                    let cancelButton = UIButton(type: UIButtonType.Custom)
+                    //                    cancelButton.frame = CGRect(x: 0, y: CGRectGetMaxY(separatorImageView.frame), width: CGRectGetWidth(notifierView.frame), height: MJAV_Height_Cancel_Button)
+                    //                    cancelButton.backgroundColor = UIColor.colorWithHex(hex: 0x000000)
+                    //                    cancelButton.addTarget(self, action: #selector(UIView.buttonCancelClicked(_:)), forControlEvents: UIControlEvents.TouchUpInside)
+                    //                    cancelButton.titleLabel?.font = MJAV_NOTIFIER_CANCEL_FONT
+                    //                    notifierView.addSubview(cancelButton)
                 }
                 
                 self.startEntryAnimation(notifierView, withFinalFrame: finalFrame)
@@ -250,11 +251,11 @@ private extension UIView {
                                         animations: {
                                             view.alpha = 0
                                             view.frame = finalFrame
-                                        },
+                },
                                         completion: { (finished : Bool) in
                                             completion?(finished: finished)
-                                        }
-                                    )
+                }
+            )
         }
     }
     
@@ -279,18 +280,18 @@ private extension UIView {
                 view.layer.zPosition = 400
                 view.layer.transform = anotherTransform
                 
-            }, completion: { (finished : Bool) in
-                UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
-                    
-                    var atLastFrame = mutableFinalFrame
-                    atLastFrame.origin.y = finalYOffset
-                    view.frame = atLastFrame
-                    
-                    let transform = self.transformWithXAxisValue(0.0, andAngle: 90)
-                    view.layer.zPosition = 400
-                    view.layer.transform = transform
-                    
-                }, completion: nil)
+                }, completion: { (finished : Bool) in
+                    UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: {
+                        
+                        var atLastFrame = mutableFinalFrame
+                        atLastFrame.origin.y = finalYOffset
+                        view.frame = atLastFrame
+                        
+                        let transform = self.transformWithXAxisValue(0.0, andAngle: 90)
+                        view.layer.zPosition = 400
+                        view.layer.transform = transform
+                        
+                        }, completion: nil)
             })
         }
         
@@ -299,7 +300,7 @@ private extension UIView {
     class func startExitAnimation(notifierView : UIView?) {
         
         if let view = notifierView {
-        
+            
             let screenBounds = MJAV_APPDELEGATE!.window!!.bounds
             
             var notifierFrame = view.frame
@@ -311,18 +312,18 @@ private extension UIView {
                 let transform = transformWithXAxisValue(0.1, andAngle: 30)
                 view.layer.zPosition = 400
                 view.layer.transform = transform
-            }, completion: { (finished : Bool) in
-                UIView.animateWithDuration(0.15, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { 
-                    var atLastFrame = view.frame
-                    atLastFrame.origin.y = CGRectGetHeight(screenBounds)
-                    view.frame = atLastFrame
-                    
-                    let transform = transformWithXAxisValue(-1, andAngle: 90)
-                    view.layer.zPosition = 400
-                    view.layer.transform = transform
                 }, completion: { (finished : Bool) in
-                    view.removeFromSuperview()
-                })
+                    UIView.animateWithDuration(0.15, delay: 0, options: UIViewAnimationOptions.CurveEaseIn, animations: { 
+                        var atLastFrame = view.frame
+                        atLastFrame.origin.y = CGRectGetHeight(screenBounds)
+                        view.frame = atLastFrame
+                        
+                        let transform = transformWithXAxisValue(-1, andAngle: 90)
+                        view.layer.zPosition = 400
+                        view.layer.transform = transform
+                        }, completion: { (finished : Bool) in
+                            view.removeFromSuperview()
+                    })
             })
         }
     }

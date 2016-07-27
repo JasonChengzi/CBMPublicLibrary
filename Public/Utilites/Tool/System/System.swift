@@ -23,5 +23,19 @@ struct System {
                 
             }
         }
+        static func requestLocationPermission(onEventPermissionGranted : (() -> Void)?, onEventPermissionNotGranted : (() -> Void)?) {
+            
+        }
+    }
+    
+    static func dial(phone : String) {
+        guard !Platform.isSimulator else {
+            Log.logString("System：模拟器无法拨打电话。")
+            return
+        }
+        if let url = NSURL(string: "tel://\(phone)") {
+            UIApplication.sharedApplication().openURL(url)
+        }
+        
     }
 }

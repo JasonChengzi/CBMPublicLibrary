@@ -59,4 +59,4 @@ extension Then where Self: AnyObject {
 
 extension NSObject: Then {}
 extension UIView: Then {}
-//extension UITextView: Then{}
+extension UITextView: Then{}
