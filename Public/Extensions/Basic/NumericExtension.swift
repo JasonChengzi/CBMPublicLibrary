@@ -44,6 +44,20 @@ extension Int {
         }
         return false
     }
+    static func MAX(lbs : Int, _ rbs : Int) -> Int {
+        if lbs < rbs {
+            return rbs
+        } else {
+            return lbs
+        }
+    }
+    static func MIN(lbs : Int, _ rbs : Int) -> Int {
+        if lbs > rbs {
+            return rbs
+        } else {
+            return rbs
+        }
+    }
 }
 
 extension Float {

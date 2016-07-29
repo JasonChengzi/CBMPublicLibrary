@@ -78,3 +78,21 @@ func cancel_delay(closure : dispatch_cancelable_closure?) {
         closure!(cancel: true)
     }
 }
+
+
+protocol Logable : CustomStringConvertible {
+    init(dictionary : [String : AnyObject])
+}
+
+extension Logable where Self : AnyObject {
+    var description : String {
+        let mirror = Mirror.init(reflecting: self)
+        var string = "\(mirror.subjectType){\n"
+        for (key, value) in mirror.children {
+            string += "\t\(key ?? "nil") : \(value ?? String("nil"))\n"
+        }
+        string += "}\n"
+        return string
+    }
+    var debusDescription : String { return description }
+}
