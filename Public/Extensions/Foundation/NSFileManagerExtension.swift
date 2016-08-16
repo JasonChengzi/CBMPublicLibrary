@@ -12,7 +12,7 @@ extension NSFileManager {
             do {
                 try self.createDirectoryAtPath(path.toNSString.stringByDeletingLastPathComponent as String, withIntermediateDirectories: true, attributes: nil)
             } catch {
-                Log.logString("Create Audio Directory Exception Caught.")
+                debugLog("Create Audio Directory Exception Caught.")
             }
             return true
         } else {

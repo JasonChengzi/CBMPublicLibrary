@@ -68,6 +68,29 @@ extension String {
         return Double(self) ?? Double(0)
     }
     
+    var hexaToInt : Int { return Int(strtoul(self, nil, 16)) }
+    var hexaToDouble : Double { return Double((strtoul(self, nil, 16))) }
+    var hexaToBinary : String { return String(hexaToInt, radix: 2) }
+    
+    var decimalToHexa : String { return String(Int(self) ?? 0, radix: 16)}
+    var decimalToBinary : String { return String(Int(self) ?? 0, radix: 2) }
+    
+    var binaryToInt : Int { return Int(strtoul(self, nil, 2)) }
+    var binaryToDouble : Double { return Double(strtoul(self, nil, 2)) }
+    var binaryToHexa : String { return String(binaryToInt, radix: 16) }
+    
+    var stringArray : [String] {
+        if self.length > 0 {
+            var array = [String]()
+            for character in self.characters {
+                array.append(String(character))
+            }
+            return array
+        } else {
+            return [String]()
+        }
+    }
+    
     ///获取第一个字母
     var firstLetter : String {
         var ret = ""
@@ -88,7 +111,7 @@ extension String {
         }
         return self
     }
-
+    
     func getFirstLetter() -> String {
         return self.firstLetter
     }
@@ -138,6 +161,15 @@ extension String {
         return String(format: hash as String)
     }
     
+    func stringByAppendingPathComponent(component : String) -> String {
+        return (self as NSString).stringByAppendingPathComponent(component) as String
+    }
+    func stringByDeletingPathExtension() -> String {
+        return (self as NSString).stringByDeletingPathExtension as String
+    }
+    func stringByAppendingPathExtension(pathExtension : String) -> String {
+        return (self as NSString).stringByAppendingPathExtension(pathExtension) ?? self
+    }
 }
 
 struct MCPattern {

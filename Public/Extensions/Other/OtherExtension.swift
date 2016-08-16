@@ -6,7 +6,6 @@
 //  Copyright © 2016年 Hvit. All rights reserved.
 //
 
-typealias Byte = UInt8
 
 func inside (left : Int, right : (min : Int, max : Int)) -> Bool {
     if left <= right.max && left >= right.min {

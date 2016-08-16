@@ -221,7 +221,7 @@ enum Request {
     }
     
     func willSubmitRequest(api : Api) -> Bool {
-        Log.logString("接口：\(api.apiName)\n即将提交的数据：\n路径：\(api.url)\n参数：\(api.params.toString)")
+        debugLog("接口：\(api.apiName)\n即将提交的数据：\n路径：\(api.url)\n参数：\(api.params.toString)")
         
         return true
         /*
@@ -236,7 +236,7 @@ enum Request {
         */
     }
     func didSubmitRequest(api : Api, responseObject : AnyObject?, responseError : NSError?, result : Result?) {
-        Log.logString("接口：\(api.apiName)\n返回的内容：\n错误：\(responseError)\n数据：\(responseObject)")
+        debugLog("接口：\(api.apiName)\n返回的内容：\n错误：\(responseError)\n数据：\(responseObject)")
     }
     
     func processData(api : Api, responseObject : AnyObject?, responseError : NSError?) -> Result {

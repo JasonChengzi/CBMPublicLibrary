@@ -7,6 +7,8 @@
 //
 import UIKit
 
+typealias Byte = UInt8
+
 extension Int {
     ///转换为CGFloat
     var toCGFloat   : CGFloat   { return CGFloat(self)          }
@@ -14,7 +16,8 @@ extension Int {
     var toFloat     : Float     { return Float(self)            }
     ///转换为Double
     var toDouble    : Double    { return Double(self)           }
-    
+    ///转换为Byte
+    var toByte      : Byte      { return Byte(self)             }
     ///一半数值
     var half        : Int       { return self / 2               }
     ///相反数值
@@ -29,6 +32,10 @@ extension Int {
     var square      : Int       { return (self * self)          }
     ///立方数
     var cube        : Int       { return (self * self * self)   }
+    ///二进制字符串
+    var binaryString: String    { return String(self, radix: 2) }
+    ///十六进制字符串
+    var hexaString  : String    { return String(self, radix: 16)}
     
     ///是否在开区间内
     func isGreaterThan(min : Int, lessThan max : Int) -> Bool {
@@ -44,18 +51,18 @@ extension Int {
         }
         return false
     }
-    static func MAX(lbs : Int, _ rbs : Int) -> Int {
-        if lbs < rbs {
-            return rbs
+    static func MAX(lhs : Int, _ rhs : Int) -> Int {
+        if lhs < rhs {
+            return rhs
         } else {
-            return lbs
+            return lhs
         }
     }
-    static func MIN(lbs : Int, _ rbs : Int) -> Int {
-        if lbs > rbs {
-            return rbs
+    static func MIN(lhs : Int, _ rhs : Int) -> Int {
+        if lhs > rhs {
+            return rhs
         } else {
-            return rbs
+            return lhs
         }
     }
 }
@@ -136,4 +143,32 @@ extension Double {
         }
         return false
     }
+}
+
+extension Byte {
+    var toInt : Int {
+        return Int(self)
+    }
+}
+
+func ^ (left: Double, right: Double) -> Double {
+    return pow(left, right)
+}
+infix operator ^= { associativity right precedence 90 }
+func ^= (inout left: Double, right: Double) {
+    left = left ^ right
+}
+
+prefix operator √ {}
+prefix func √ (number: Double) -> Double {
+    return sqrt(number)
+}
+infix operator ± { associativity left precedence 140 }
+func ± (left: Double, right: Double) -> (Double, Double) {
+    return (left + right, left - right)
+}
+
+prefix operator ± {}
+prefix func ± (value: Double) -> (Double, Double) {
+    return 0 ± value
 }

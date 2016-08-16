@@ -30,7 +30,7 @@ struct System {
     
     static func dial(phone : String) {
         guard !Platform.isSimulator else {
-            Log.logString("System：模拟器无法拨打电话。")
+            debugLog("System：模拟器无法拨打电话。")
             return
         }
         if let url = NSURL(string: "tel://\(phone)") {
