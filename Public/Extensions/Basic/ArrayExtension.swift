@@ -100,3 +100,7 @@ extension Array where Element: Hashable {
         self = result
     }
 }
+
+extension Array : Loggable {
+    
+}

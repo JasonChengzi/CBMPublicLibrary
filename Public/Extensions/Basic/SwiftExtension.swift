@@ -16,4 +16,19 @@ extension Bool {
     mutating func toggle() {
         self = !self
     }
+    var stringValue : String {
+        if self == true {
+            return "1"
+        } else {
+            return "0"
+        }
+    }
+    
+    static func bool(fromString boolString : String) -> Bool {
+        if boolString == "1" {
+            return true
+        } else {
+            return false
+        }
+    }
 }

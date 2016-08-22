@@ -26,3 +26,7 @@ extension Dictionary {
         return dicString + "\n    }"
     }
 }
+
+extension Dictionary : Loggable {
+    
+}

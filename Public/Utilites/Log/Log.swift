@@ -26,3 +26,6 @@ func debugCompleteLog<T>(value : T) {
         print("==========\(NSDate().toStandardString)==========\n(In file \(#file) at line \(#line).)\n[func \(#function)]\n\(value)\n")
     #endif
 }
+
+
+
