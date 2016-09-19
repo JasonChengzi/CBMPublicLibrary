@@ -66,6 +66,17 @@ extension Int {
         }
     }
 }
+extension Int {
+    subscript(digitIndex : Int) -> Int {
+        var decimalBase = 1
+        for _ in 0..<digitIndex {
+            decimalBase *= 10
+        }
+        return (self / decimalBase) % 10
+    }
+}
+extension Int { static func random(from from : Int, to : Int) -> Int { return from + (Int(arc4random()) % (to - from)) } }
+extension Int : Addable { }
 
 extension Float {
     ///转换为CGFloat
@@ -105,6 +116,7 @@ extension Float {
         return false
     }
 }
+extension Float : Addable { }
 
 extension Double {
     ///转换为CGFloat
@@ -144,6 +156,7 @@ extension Double {
         return false
     }
 }
+extension Double : Addable { }
 
 extension Byte {
     var toInt : Int {

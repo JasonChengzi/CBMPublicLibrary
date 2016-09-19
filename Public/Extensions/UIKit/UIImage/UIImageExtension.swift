@@ -16,9 +16,10 @@ extension UIImage {
         }
         
         UIGraphicsBeginImageContext(imageSize)
-        let context = UIGraphicsGetCurrentContext()
-        CGContextSetFillColorWithColor(context, color.CGColor)
-        CGContextFillRect(context, CGRect(origin: CGPointZero, size: CGSize.zero))
+        if let context = UIGraphicsGetCurrentContext() {
+            CGContextSetFillColorWithColor(context, color.CGColor)
+            CGContextFillRect(context, CGRect(origin: CGPointZero, size: CGSize.zero))
+        }
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image ?? UIImage()

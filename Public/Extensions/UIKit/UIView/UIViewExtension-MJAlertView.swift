@@ -95,7 +95,7 @@ extension UIView {
             
             let height = MJAV_Height_Label
             let width = CGFloat.max
-            let notifierRect = text.toNSString.boundingRectWithSize(
+            let notifierRect = text.nsstring.boundingRectWithSize(
                 CGSize(
                     width: width,
                     height: height

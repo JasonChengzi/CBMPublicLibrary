@@ -66,16 +66,16 @@ enum Request {
                         
                         self.didSubmitRequest(api, responseObject: responseObject, responseError: nil, result: result)
                         
-//                        if result.code == .NeedsReLogin {
-//                            if let userVM = CentralProcessor.fetchViewModel(UserViewModel) as? UserViewModel {
-//                                userVM.needsRelogin()
-//                            }
-//                        } else {
-                            if let closure = successClosure {
-                                
-                                closure(result: result)
-                            }
-//                        }
+                        //                        if result.code == .NeedsReLogin {
+                        //                            if let userVM = CentralProcessor.fetchViewModel(UserViewModel) as? UserViewModel {
+                        //                                userVM.needsRelogin()
+                        //                            }
+                        //                        } else {
+                        if let closure = successClosure {
+                            
+                            closure(result: result)
+                        }
+                        //                        }
                     },
                     failure: {
                         (dataTask : NSURLSessionDataTask?, responseError : NSError) in
@@ -83,7 +83,7 @@ enum Request {
                         let result = self.processData(api, responseObject: nil, responseError: responseError)
                         
                         self.didSubmitRequest(api, responseObject: nil, responseError: responseError, result: result)
-                            
+                        
                         if let closure = serverClosure {
                             closure()
                         }
@@ -123,16 +123,16 @@ enum Request {
                         
                         self.didSubmitRequest(api, responseObject: responseObject, responseError: nil, result: result)
                         
-//                        if result.code == .NeedsReLogin {
-//                            if let userVM = CentralProcessor.fetchViewModel(UserViewModel) as? UserViewModel {
-//                                userVM.needsRelogin()
-//                            }
-//                        } else {
-                            if let closure = successClosure {
-                                
-                                closure(result: result)
-                            }
-//                        }
+                        //                        if result.code == .NeedsReLogin {
+                        //                            if let userVM = CentralProcessor.fetchViewModel(UserViewModel) as? UserViewModel {
+                        //                                userVM.needsRelogin()
+                        //                            }
+                        //                        } else {
+                        if let closure = successClosure {
+                            
+                            closure(result: result)
+                        }
+                        //                        }
                     },
                     failure: {
                         (dataTask : NSURLSessionDataTask?, responseError : NSError) in
@@ -190,16 +190,16 @@ enum Request {
                         
                         self.didSubmitRequest(api, responseObject: responseObject, responseError: nil, result: result)
                         
-//                        if result.code == .NeedsReLogin {
-//                            if let userVM = CentralProcessor.fetchViewModel(UserViewModel) as? UserViewModel {
-//                                userVM.needsRelogin()
-//                            }
-//                        } else {
-                            if let closure = successClosure {
-                                
-                                closure(result: result)
-                            }
-//                        }
+                        //                        if result.code == .NeedsReLogin {
+                        //                            if let userVM = CentralProcessor.fetchViewModel(UserViewModel) as? UserViewModel {
+                        //                                userVM.needsRelogin()
+                        //                            }
+                        //                        } else {
+                        if let closure = successClosure {
+                            
+                            closure(result: result)
+                        }
+                        //                        }
                     },
                     failure: {
                         (dataTask : NSURLSessionDataTask?, responseError : NSError) in
@@ -225,15 +225,15 @@ enum Request {
         
         return true
         /*
-        if Reachability.connectedToNetwork() {
-            return true
-        } else {
-            
-            SVProgressHUD.showErrorWithStatus("当前网络不可用")
-            
-            return false
-        }
-        */
+         if Reachability.connectedToNetwork() {
+         return true
+         } else {
+         
+         SVProgressHUD.showErrorWithStatus("当前网络不可用")
+         
+         return false
+         }
+         */
     }
     func didSubmitRequest(api : Api, responseObject : AnyObject?, responseError : NSError?, result : Result?) {
         debugLog("接口：\(api.apiName)\n返回的内容：\n错误：\(responseError)\n数据：\(responseObject)")
@@ -259,9 +259,7 @@ enum Request {
                         intCode = (anyCode as! Int)
                     }
                     if anyCode as? String != nil {
-                        if (anyCode as! String).isInt {
-                            intCode = (anyCode as! String).toInt
-                        }
+                        intCode = (anyCode as! String).intValue
                     }
                     if intCode != nil {
                         code = ResponseCode(rawValue: intCode!) ?? ResponseCode.Unknown

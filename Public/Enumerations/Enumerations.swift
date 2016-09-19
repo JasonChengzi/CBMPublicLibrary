@@ -48,3 +48,29 @@ enum ServerType {
     ///外网服务器
     case RELEASE
 }
+
+
+//enum WeekDays : String {
+//    case Monday, Tuesday, Wendsday, Thursday, Friday, Saturday, Sunday
+//    
+//    //星期一、星期二……
+//    var CHINESE_standard : String {
+//        switch self {
+//        case Monday:
+//            return ""
+//        case Tuesday:
+//            return ""
+//        case Wendsday:
+//            return ""
+//        case Thursday:
+//            return ""
+//        case Friday:
+//            return ""
+//        case Saturday:
+//            return ""
+//        case Sunday:
+//            return ""
+//        }
+//    }
+//    
+//}

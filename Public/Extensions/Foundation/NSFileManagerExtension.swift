@@ -8,9 +8,9 @@
 
 extension NSFileManager {
     func isFileExisted(path : String) -> Bool {
-        if self.fileExistsAtPath(path.toNSString.stringByDeletingLastPathComponent as String) {
+        if self.fileExistsAtPath(path.nsstring.stringByDeletingLastPathComponent as String) {
             do {
-                try self.createDirectoryAtPath(path.toNSString.stringByDeletingLastPathComponent as String, withIntermediateDirectories: true, attributes: nil)
+                try self.createDirectoryAtPath(path.nsstring.stringByDeletingLastPathComponent as String, withIntermediateDirectories: true, attributes: nil)
             } catch {
                 debugLog("Create Audio Directory Exception Caught.")
             }

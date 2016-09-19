@@ -8,13 +8,17 @@
 import Foundation
 
 typealias GCD_Cancelable_Closure = (cancel : Bool) -> Void
+typealias GCD_Timer = dispatch_source_t
+typealias GCD_Queue = dispatch_queue_t
 struct GCD {
-    
+    static func getTimer(withQueue queue: dispatch_queue_t) -> GCD_Timer {
+        return dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, queue)
+    }
     /*
      * 延时执行
      * https://stackoverflow.com/questions/24034544/dispatch-after-gcd-in-swift/24318861#24318861
      */
-    func perform(afterDelay delay : NSTimeInterval, andOperationClosure operation : Closure.empty) -> GCD_Cancelable_Closure? {
+    static func perform(afterDelay delay : NSTimeInterval, andOperationClosure operation : Closure.empty) -> GCD_Cancelable_Closure? {
         func dispatch_later(perform : Closure.empty) {
             dispatch_after(
                 dispatch_time(
@@ -48,19 +52,77 @@ struct GCD {
         return cancelableClosure
     }
     
-    func cancel(forDelayedClosure closure : GCD_Cancelable_Closure?) {
+    static func cancel(forDelayedClosure closure : GCD_Cancelable_Closure?) {
         
         if closure != nil {
             closure!(cancel: true)
         }
     }
+    
+    static func perform(asyncOnMainQuequeWithOperationClosure operation : dispatch_block_t) {
+        dispatch_async(dispatch_get_main_queue(), operation)
+    }
 }
 
 struct Closure {
     /// () -> Void
-    typealias empty = ()->Void
+    typealias empty = () -> Void
     /// (success : Bool) -> Void
     typealias success = (success : Bool) -> Void
     /// (finish : Bool) -> Void
     typealias finished = (finished : Bool) -> Void
+    /// (error : NSError?) -> Void
+    typealias error = (error : NSError?) -> Void
+    /// (array: [AnyObject]?) -> Void
+    typealias array = (array: [AnyObject]?) -> Void
+    /// (dictionary: [String: AnyObject]?) -> Void
+    typealias dictionary = (dictionary: [String: AnyObject]?) -> Void
+    /// (dictionary: [String: AnyObject]?, array: [AnyObject]?) -> Void
+    typealias mixed = (dictionary: [String: AnyObject]?, array: [AnyObject]?) -> Void
 }
+
+infix operator ?! { associativity right precedence 110 }
+func ?!<T>(optional: T?, @autoclosure defaultValue: () -> T) -> T {
+    if let x = optional {
+        return x
+    } else {
+        return defaultValue()
+    }
+}
+
+struct Method {
+    static func toBeFinished() { debugCompleteLog("未完成的方法。") }
+    static func toBeHandledException() { debugCompleteLog("未处理的异常。") }
+}
+
+struct Stack<Element> {
+    private(set) var items = [Element]()
+    var topItem : Element? {
+        return items.isEmpty ? nil : items[items.count - 1]
+    }
+    mutating func push(item : Element) { items.append(item) }
+    mutating func pop() throws -> Element {
+        if items.isEmpty {
+            throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "No more item."])
+        } else {
+            return items.removeLast()
+        }
+    }
+}
+struct Queue<Element> {
+    private(set) var items = [Element]()
+    mutating func push(item : Element) { items.append(item) }
+    mutating func pop() throws -> Element {
+        if items.isEmpty {
+            throw NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey : "No more item."])
+        } else {
+            return items.removeFirst()
+        }
+    }
+}
+
+// MARK: - Swift 3 style
+typealias Date = NSDate
+typealias Calendar = NSCalendar
+typealias DateFormatter = NSDateFormatter
+typealias FileManager = NSFileManager

@@ -12,3 +12,9 @@ protocol Loggable : CustomStringConvertible {
     //    init(dictionary : [String : AnyObject])
 }
 
+protocol Addable {
+    init()
+    
+    func + (lhs: Self, rhs: Self) -> Self
+}
+

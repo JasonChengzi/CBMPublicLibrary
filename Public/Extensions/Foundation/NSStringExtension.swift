@@ -24,6 +24,6 @@ extension NSString {
     }
     
     func getFirstLetter() -> NSString {
-        return (self as String).firstLetter.toNSString
+        return (self as String).firstLetter.nsstring
     }
 }

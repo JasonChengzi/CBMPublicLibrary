@@ -7,6 +7,7 @@
 //
 import UIKit
 
+
 extension NSDate {
     // MARK: Data component
     var year : Int {
@@ -69,7 +70,7 @@ extension NSDate {
     }
     
     ///获取当前时间的NSDate对象
-    static var CurrentDate : NSDate {
+    static var current : NSDate {
         get {
             return NSDate()
         }
@@ -82,155 +83,38 @@ extension NSDate {
         }
     }
     
-    ///将时间转换为字符串
-    var toStandardString : String {
-        get {
-            return NSDateFormatter.StandardDateFormatter.stringFromDate(self)
-        }
-    }
-    
-    func dateOfHour(hour : Int) -> NSDate? {
-        let calendar = NSCalendar.currentCalendar()
-        let components = NSDateComponents.dateComponentsWithCalendar(calendar, andDate: self)
-        components.hour = hour
-        components.minute = 0
-        components.second = 0
-        if let timeInterval = calendar.dateFromComponents(components)?.timeIntervalSince1970 {
-            return NSDate(timeIntervalSince1970: timeInterval)
-        } else {
-            return nil
-        }
-    }
-    var dateOfZero : NSDate? {
-        return dateOfHour(0)
-    }
-    static var zeroOfToday : NSDate {
-        let dateFormater = NSDateFormatter()
-        dateFormater.dateFormat = "yyyy-MM-dd"
-        return dateFormater.dateFromString(dateFormater.stringFromDate(NSDate()))!
-    }
-    
-    // MARK: Time string
-    func stringYearMonthDayCompareToday() -> String {
-        var string = ""
-        let chaDay = self.daysBetweenCurrentDateAndDate()
-        if chaDay == 0 {
-            string = "Today"
-        } else if chaDay == 1 {
-            string = "Tomorrow"
-        } else if chaDay == -1 {
-            string = "Yesterday"
-        } else {
-            string = self.stringYearMonthDay()
-        }
-        return string
-    }
-    
-    static func stringLoacalDate() -> String {
-        let formatter = NSDateFormatter()
-        formatter.timeZone = NSTimeZone(abbreviation: "UTC")
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let date = NSDate()
-        let zone = NSTimeZone.systemTimeZone()
-        let interval = zone.secondsFromGMTForDate(date)
-        let localDate = date.dateByAddingTimeInterval(interval.toDouble)
-        return formatter.stringFromDate(localDate)
-    }
-    
-    static func stringYearMonthDayWithDate(date : NSDate?) -> String {
-        var theDate = date
-        if theDate == nil {
-            theDate = NSDate()
-        }
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        return formatter.stringFromDate(theDate!)
-    }
-    
-    static func dateMonthDayWithDate(date : NSDate?) -> String {
-        var theDate = date
-        if theDate == nil {
-            theDate = NSDate()
-        }
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "MM.dd"
-        return formatter.stringFromDate(theDate!)
-    }
-    
-    static func dateStandardFormatTimeZeroWithDate(aDate : NSDate?) -> NSDate {
-        let string = NSDate.stringYearMonthDayWithDate(aDate).stringByAppendingString("00:00:00")
-        return NSDate.dateFromString(string)
-    }
-    
-    func daysBetweenCurrentDateAndDate() -> Int {
-        //只取年月日比较
-        let dateSelf = NSDate.dateStandardFormatTimeZeroWithDate(self)
-        let timeInterval = dateSelf.timeIntervalSince1970
-        let dateNow = NSDate.dateStandardFormatTimeZeroWithDate(nil)
-        let timeIntervalNow = dateNow.timeIntervalSince1970
-        
-        let cha = timeInterval - timeIntervalNow
-        let chaDay = cha / 86400.0
-        let day = chaDay * 1
-        return day.toInt
-    }
-    
-    static func dateFromString(string : String) -> NSDate {
-        return NSDate.dateFromString(string, withFormat: NSDate.dbFormatString)
-    }
-    
-    static func dateFromString(string : String, withFormat format : String) -> NSDate {
-        let inputFormatter = NSDateFormatter()
-        inputFormatter.dateFormat = format
-        let date = inputFormatter.dateFromString(string)
-        return date ?? NSDate()
-    }
-    
-    static var dbFormatString : String {
-        return NSDate.timestampFormatString
-    }
-    
-    static var dateFormatString : String {
-        return "yyyy-MM-dd"
-    }
-    
-    static var timeFormatString : String {
-        return "HH:mm:ss"
-    }
-    
-    static var timestampFormatString : String {
-        return "yyyy-MM-dd HH:mm:ss"
-    }
-    
-    static var timestampFormatStringSubSeconds : String {
-        return "yyyy-MM-dd HH:mm"
-    }
-    
-    // MARK: Date String
-    func stringTime() -> String {
-        let formatter : NSDateFormatter  = NSDateFormatter()
-        formatter.dateFormat = "HH:mm"
-        
-        let str = formatter.stringFromDate(self)
-        
-        return str
-    }
-    func stringMonthDay() -> String {
-        return NSDate.dateMonthDayWithDate(self)
-    }
-    func stringYearMonthDay() -> String {
-        return NSDate.stringYearMonthDayWithDate(self)
-    }
-    func stringYearMonthDayHourMinuteSecond() -> String {
-        let formatter = NSDateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        return formatter.stringFromDate(self)
+    ///标准日期格式日期字符串。yyyy-MM-dd HH:mm:ss
+    var standardDateString : String {
+        return NSDateFormatter.standardDateFormatter.stringFromDate(self)
     }
 }
 
+// MARK: 计算差值
+extension Date {
+    func years(from date : Date) -> Int { return Calendar.current.components(.Year, fromDate: date, toDate: self, options: []).year }
+    func months(from date : Date) -> Int { return Calendar.current.components(.Month, fromDate: date, toDate: self, options: []).month }
+    func weeks(from date : Date) -> Int { return Calendar.current.components(.WeekOfYear, fromDate: date, toDate: self, options: []).weekOfYear }
+    func days(from date : Date) -> Int { return Calendar.current.components(.Day, fromDate: date, toDate: self, options: []).day }
+    func hours(from date : Date) -> Int { return Calendar.current.components(.Hour, fromDate: date, toDate: self, options: []).hour }
+    func minutes(from date : Date) -> Int { return Calendar.current.components(.Minute, fromDate: date, toDate: self, options: []).minute }
+    func seconds(from date : Date) -> Int { return Calendar.current.components(.Second, fromDate: date, toDate: self, options: []).second }
+    
+    func offset(from date : Date) -> String {
+        if case let years = self.years(from: date) where years > 0 { return "\(years)年" }
+        if case let months = self.months(from: date) where months > 0 { return "\(months)月" }
+        if case let weeks = self.months(from: date) where weeks > 0 { return "\(weeks)周" }
+        if case let days = self.months(from: date) where days > 0 { return "\(days)天" }
+        if case let hours = self.months(from: date) where hours > 0 { return "\(hours)小时" }
+        if case let minutes = self.months(from: date) where minutes > 0 { return "\(minutes)分钟" }
+        if case let seconds = self.months(from: date) where seconds > 0 { return "\(seconds)秒" }
+        return ""
+    }
+}
+
+
 extension NSDateFormatter {
     ///获取标准日期格式器
-    static var StandardDateFormatter : NSDateFormatter {
+    static var standardDateFormatter : NSDateFormatter {
         get {
             let formatter = NSDateFormatter()
             formatter.dateStyle     = NSDateFormatterStyle.MediumStyle
@@ -238,6 +122,18 @@ extension NSDateFormatter {
             formatter.dateFormat    = "yyyy-MM-dd HH:mm:ss"
             return formatter
         }
+    }
+    
+    static func dateFormatter(withFormat format : String) -> NSDateFormatter {
+        let formatter = NSDateFormatter()
+        formatter.dateFormat = format
+        return formatter
+    }
+}
+
+extension NSCalendar {
+    static var current : NSCalendar {
+        return NSCalendar.currentCalendar()
     }
 }
 
