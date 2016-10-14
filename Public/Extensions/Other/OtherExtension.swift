@@ -63,6 +63,19 @@ struct GCD {
         dispatch_async(dispatch_get_main_queue(), operation)
     }
 }
+struct Dispatcher {
+    typealias CancelableClosure = (cancel : Bool) -> Void
+    typealias Closure = dispatch_block_t
+    typealias Timer = dispatch_source_t
+    typealias Queue = dispatch_queue_t
+    
+    static func performAsync(on queue: Queue, operation: Closure) {
+        dispatch_async(queue, operation)
+    }
+    static func performAsync(onMainQueue operation: Closure) {
+        performAsync(on: dispatch_get_main_queue(), operation: operation)
+    }
+}
 
 struct Closure {
     /// () -> Void
@@ -81,18 +94,9 @@ struct Closure {
     typealias mixed = (dictionary: [String: AnyObject]?, array: [AnyObject]?) -> Void
 }
 
-infix operator ?! { associativity right precedence 110 }
-func ?!<T>(optional: T?, @autoclosure defaultValue: () -> T) -> T {
-    if let x = optional {
-        return x
-    } else {
-        return defaultValue()
-    }
-}
-
 struct Method {
-    static func toBeFinished() { debugCompleteLog("未完成的方法。") }
-    static func toBeHandledException() { debugCompleteLog("未处理的异常。") }
+    static func toBeFinished(file: String? = #file, line: Int? = #line, column: Int? = #column, function: String? = #function) { debugCompleteLog("未完成的方法。", file: file, line: line, column: column, function: function) }
+    static func toBeHandledException(file: String? = #file, line: Int? = #line, column: Int? = #column, function: String? = #function) { debugCompleteLog("未处理的异常。", file: file, line: line, column: column, function: function) }
 }
 
 struct Stack<Element> {
@@ -126,3 +130,4 @@ typealias Date = NSDate
 typealias Calendar = NSCalendar
 typealias DateFormatter = NSDateFormatter
 typealias FileManager = NSFileManager
+typealias UserDefaults = NSUserDefaults

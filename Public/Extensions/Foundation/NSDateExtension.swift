@@ -91,22 +91,22 @@ extension NSDate {
 
 // MARK: 计算差值
 extension Date {
-    func years(from date : Date) -> Int { return Calendar.current.components(.Year, fromDate: date, toDate: self, options: []).year }
-    func months(from date : Date) -> Int { return Calendar.current.components(.Month, fromDate: date, toDate: self, options: []).month }
-    func weeks(from date : Date) -> Int { return Calendar.current.components(.WeekOfYear, fromDate: date, toDate: self, options: []).weekOfYear }
-    func days(from date : Date) -> Int { return Calendar.current.components(.Day, fromDate: date, toDate: self, options: []).day }
-    func hours(from date : Date) -> Int { return Calendar.current.components(.Hour, fromDate: date, toDate: self, options: []).hour }
-    func minutes(from date : Date) -> Int { return Calendar.current.components(.Minute, fromDate: date, toDate: self, options: []).minute }
-    func seconds(from date : Date) -> Int { return Calendar.current.components(.Second, fromDate: date, toDate: self, options: []).second }
+    func years  (from date : Date) -> Int { return Calendar.current.components(.Year,       fromDate: date, toDate: self, options: []).year         }
+    func months (from date : Date) -> Int { return Calendar.current.components(.Month,      fromDate: date, toDate: self, options: []).month        }
+    func weeks  (from date : Date) -> Int { return Calendar.current.components(.WeekOfYear, fromDate: date, toDate: self, options: []).weekOfYear   }
+    func days   (from date : Date) -> Int { return Calendar.current.components(.Day,        fromDate: date, toDate: self, options: []).day          }
+    func hours  (from date : Date) -> Int { return Calendar.current.components(.Hour,       fromDate: date, toDate: self, options: []).hour         }
+    func minutes(from date : Date) -> Int { return Calendar.current.components(.Minute,     fromDate: date, toDate: self, options: []).minute       }
+    func seconds(from date : Date) -> Int { return Calendar.current.components(.Second,     fromDate: date, toDate: self, options: []).second       }
     
     func offset(from date : Date) -> String {
-        if case let years = self.years(from: date) where years > 0 { return "\(years)年" }
-        if case let months = self.months(from: date) where months > 0 { return "\(months)月" }
-        if case let weeks = self.months(from: date) where weeks > 0 { return "\(weeks)周" }
-        if case let days = self.months(from: date) where days > 0 { return "\(days)天" }
-        if case let hours = self.months(from: date) where hours > 0 { return "\(hours)小时" }
-        if case let minutes = self.months(from: date) where minutes > 0 { return "\(minutes)分钟" }
-        if case let seconds = self.months(from: date) where seconds > 0 { return "\(seconds)秒" }
+        if case let years   = self.years(from: date)    where years     > 0 { return "\(years)年"    }
+        if case let months  = self.months(from: date)   where months    > 0 { return "\(months)月"   }
+        if case let weeks   = self.months(from: date)   where weeks     > 0 { return "\(weeks)周"    }
+        if case let days    = self.months(from: date)   where days      > 0 { return "\(days)天"     }
+        if case let hours   = self.months(from: date)   where hours     > 0 { return "\(hours)小时"   }
+        if case let minutes = self.months(from: date)   where minutes   > 0 { return "\(minutes)分钟" }
+        if case let seconds = self.months(from: date)   where seconds   > 0 { return "\(seconds)秒"  }
         return ""
     }
 }

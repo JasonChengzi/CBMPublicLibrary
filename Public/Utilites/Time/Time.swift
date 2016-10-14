@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Time : CustomStringConvertible {
+struct Time : CustomStringConvertible, Equatable {
     var hour : Int
     var minute : Int
     var second : Int
@@ -41,4 +41,7 @@ struct Time : CustomStringConvertible {
             else if i == 2 { second = substrings[i].toInt() }
         }
     }
+}
+func == (lhs: Time, rhs: Time) -> Bool {
+    return lhs.hour == rhs.hour && lhs.minute == rhs.minute && lhs.second == rhs.second
 }

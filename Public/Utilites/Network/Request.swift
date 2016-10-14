@@ -221,7 +221,6 @@ enum Request {
     }
     
     func willSubmitRequest(api : Api) -> Bool {
-        debugLog("接口：\(api.apiName)\n即将提交的数据：\n路径：\(api.url)\n参数：\(api.params.toString)")
         
         return true
         /*
@@ -314,10 +313,6 @@ struct Result {
     var message         : String?
     ///服务器返回数据
     var data            : [String : AnyObject]?
-    
-    func toString() -> String {
-        return "\((isSucceeded ? "Succeeded" : "Failure"))\ncode:\(code)\nmessage:\(message ?? "没有消息。")\ndata:\(data != nil ? data!.toString : "没有数据")"
-    }
 }
 
 struct ResponseParameterKey {

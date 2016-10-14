@@ -150,7 +150,21 @@ extension String {
         guard self.isEmpty == false else {
             return CGFloat(0)
         }
-        return self.sizeWithFont(font).width / width
+        let size = self.sizeWithFont(font)
+        return (size.width / width) + size.height
+    }
+    
+    func height(withConstrainedWidth width : CGFloat, andFont font : UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: width, height: CGFloat.max)
+        let boundingBox = self.boundingRectWithSize(constraintRect, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName : font], context:  nil)
+        
+        return boundingBox.height
+    }
+    func width(withConstrainedHeight height : CGFloat, andFont font : UIFont) -> CGFloat {
+        let constraintRect = CGSize(width: CGFloat.max, height: height)
+        let boundingBox = self.boundingRectWithSize(constraintRect, options: NSStringDrawingOptions.UsesLineFragmentOrigin, attributes: [NSFontAttributeName : font], context:  nil)
+        
+        return boundingBox.width
     }
 }
 

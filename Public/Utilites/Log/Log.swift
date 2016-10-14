@@ -6,24 +6,26 @@
 //  Copyright (c) 2015 Jason Raylegih. All rights reserved.
 //
 
+let DEBUG_SEPERATOR = "\t===============\t"
+
 func debugLog(message : String) {
     #if DEBUG
-        print("==========\(Date().standardDateString)(\(Date().timeStamp))==========\n\(message ?? "nil message.")\n")
+        print("\(DEBUG_SEPERATOR)\(Date().standardDateString)(\(Date().timeStamp))\(DEBUG_SEPERATOR)\n\(message ?? "nil message.")\n")
     #endif
 }
 func debugLog<T>(value : T) {
     #if DEBUG
-        print("==========\(Date().standardDateString)(\(Date().timeStamp))==========\n\(value)\n")
+        print("\(DEBUG_SEPERATOR)\(Date().standardDateString)(\(Date().timeStamp))\(DEBUG_SEPERATOR)\n\(value)\n")
     #endif
 }
-func debugCompleteLog(message : String) {
+func debugCompleteLog(message : String, file: String?, line: Int?, column: Int?, function: String?) {
     #if DEBUG
-        print("==========\(Date().standardDateString)(\(Date().timeStamp))==========\n(In file \(#file) at line \(#line).)\n[func \(#function)]\n\(message)\n")
+        print("\(DEBUG_SEPERATOR)\(Date().standardDateString)(\(Date().timeStamp))\(DEBUG_SEPERATOR)\nIn file:\n\(file ?? #file).\nAt line \(line ?? #line) and column \(column ?? #column).\n[func \(function ?? #function)]\n\(message)\n")
     #endif
 }
-func debugCompleteLog<T>(value : T) {
+func debugCompleteLog<T>(value : T, file: String?, line: Int?, column: Int?, function: String?) {
     #if DEBUG
-        print("==========\(Date().standardDateString)(\(Date().timeStamp))==========\n(In file \(#file) at line \(#line).)\n[func \(#function)]\n\(value)\n")
+        print("\(DEBUG_SEPERATOR)\(Date().standardDateString)(\(Date().timeStamp))\(DEBUG_SEPERATOR)\nIn file:\n\(file ?? #file).\nAt line \(line ?? #line) and column \(column ?? #column).\nRunning on: [func \(function ?? #function)]\n\(value)\n")
     #endif
 }
 

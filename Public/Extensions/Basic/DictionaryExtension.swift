@@ -8,25 +8,31 @@
 import UIKit
 
 extension Dictionary {
-    var toString : String {
-        var dicString = "{"
-        for key in self.keys {
-            var stringValue = self[key] as? String
-            if self[key] as? String == nil {
-                if let intValue = self[key] as? Int {
-                    stringValue = "\(intValue)"
-                } else if let floatValue = self[key] as? Float {
-                    stringValue = "\(floatValue)"
-                } else if let doubleValue = self[key] as? Double {
-                    stringValue = "\(doubleValue)"
-                }
+    mutating func merge<K, V>(with dictionarys: Dictionary<K, V>...) {
+        for dictionary in dictionarys {
+            for (key, value) in dictionary {
+                self.updateValue(value as! Value, forKey: key as! Key)
             }
-            dicString += "\n        [\(key) : \((stringValue ?? ""))]"
         }
-        return dicString + "\n    }"
     }
 }
 
 extension Dictionary : Loggable {
     
+}
+
+func + <K, V>(lhs: [K : V], rhs: [K : V]) -> [K : V] {
+    var result = [K : V]()
+    for (key, value) in lhs {
+        result[key] = value
+    }
+    for (key, value) in rhs {
+        result[key] = value
+    }
+    return result
+}
+func += <K, V>(inout lhs: [K : V], rhs: [K : V]) {
+    for (k, v) in rhs {
+        lhs[k] = v
+    }
 }
