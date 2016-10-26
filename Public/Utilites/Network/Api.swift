@@ -125,7 +125,8 @@ enum Api {
                     ApiParameterKey.ClientType          : ApiParameterKey.DEVICE_TYPE_iOS,
                     ApiParameterKey.Content_Feedback    : content,
                     ApiParameterKey.AppVersion_Feedback : ApplicationDefaults.VERSION,
-                    ApiParameterKey.AppType_Feedback    : ApiParameterKey.APP_TYPE_CGN
+                    ApiParameterKey.AppType_Feedback    : ApiParameterKey.APP_TYPE_CGN,
+                    "sys"                               : "3"
                 ],
                 data: [imageData],
                 name: "意见反馈"

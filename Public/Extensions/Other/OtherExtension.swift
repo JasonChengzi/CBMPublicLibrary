@@ -95,8 +95,8 @@ struct Closure {
 }
 
 struct Method {
-    static func toBeFinished(file: String? = #file, line: Int? = #line, column: Int? = #column, function: String? = #function) { debugCompleteLog("未完成的方法。", file: file, line: line, column: column, function: function) }
-    static func toBeHandledException(file: String? = #file, line: Int? = #line, column: Int? = #column, function: String? = #function) { debugCompleteLog("未处理的异常。", file: file, line: line, column: column, function: function) }
+    static func toBeFinished(message: String? = nil, file: String? = #file, line: Int? = #line, column: Int? = #column, function: String? = #function) { debugCompleteLog("未完成的方法。【\(message)】。", file: file, line: line, column: column, function: function) }
+    static func toBeHandledException(message: String? = nil, file: String? = #file, line: Int? = #line, column: Int? = #column, function: String? = #function) { debugCompleteLog("未处理的异常。【\(message)】。", file: file, line: line, column: column, function: function) }
 }
 
 struct Stack<Element> {
