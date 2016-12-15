@@ -7,6 +7,9 @@
 //
 import UIKit
 
+extension NSDate {
+    
+}
 
 extension NSDate {
     // MARK: Data component
@@ -111,6 +114,12 @@ extension Date {
     }
 }
 
+extension NSDateFormatter {
+    convenience init(dateFormat : String) {
+        self.init()
+        self.dateFormat = dateFormat
+    }
+}
 
 extension NSDateFormatter {
     ///获取标准日期格式器

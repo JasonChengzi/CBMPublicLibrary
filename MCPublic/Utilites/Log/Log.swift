@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Jason Raylegih. All rights reserved.
 //
 
-let DEBUG_SEPERATOR = "\t===============\t"
+let DEBUG_SEPERATOR = " =============== "
 
 func debugLog(message : String) {
     #if DEBUG

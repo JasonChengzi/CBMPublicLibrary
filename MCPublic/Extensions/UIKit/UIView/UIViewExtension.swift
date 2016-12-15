@@ -61,36 +61,6 @@ extension UIView {
         return self.makeCenterInView(UIView(frame: screen.bounds))
     }
     
-    // MARK: 链式设置
-    func makeBackgroundColor(color : UIColor?) -> UIView {
-        self.backgroundColor = color
-        return self
-    }
-    func makeFrame(frame : CGRect) -> UIView {
-        self.frame = frame
-        return self
-    }
-    func makeLayerCornerRadius(cornerRadius : CGFloat) -> UIView {
-        self.layer.cornerRadius = cornerRadius
-        return self
-    }
-    func makeLayerBorderUIColor(borderColor : UIColor?) -> UIView {
-        self.layer.borderColor = borderColor?.CGColor
-        return self
-    }
-    func makeLayerMasksToBounds(masksToBounds : Bool) -> UIView {
-        self.layer.masksToBounds = masksToBounds
-        return self
-    }
-    func makeTranslatesAutoresizingMaskIntoConstraints(translate : Bool) -> UIView {
-        self.translatesAutoresizingMaskIntoConstraints = translate
-        return self
-    }
-    func makeClipsToBOunds(clipsToBounds : Bool) -> UIView {
-        self.clipsToBounds = clipsToBounds
-        return self
-    }
-    
     class func loadFromNibNamed(name : String, bundle : NSBundle? = nil) -> UIView? {
         return UINib(nibName: name, bundle: bundle).instantiateWithOwner(nil, options: nil).first as? UIView
     }

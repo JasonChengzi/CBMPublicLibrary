@@ -42,6 +42,10 @@ struct Time : CustomStringConvertible, Equatable {
         }
     }
     
+    static func now() -> Time {
+        return Time(fromString: NSDateFormatter(dateFormat: "HH-mm-ss").stringFromDate(NSDate()), withSeparator: "-")
+    }
+    
     func isAtAM() -> Bool {
         if hour >= 0 && hour < 12 {
             return true
@@ -74,6 +78,9 @@ struct Time : CustomStringConvertible, Equatable {
             return false
         }
         return !isEarlier(than: time)
+    }
+    func toString() -> String {
+        return "\(hour < 10 ? "0" : "")\(hour):\(minute < 10 ? "0" : "")\(minute)"
     }
 }
 func == (lhs: Time, rhs: Time) -> Bool {

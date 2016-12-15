@@ -9,10 +9,3 @@
 import Foundation
 
 protocol Togglable { mutating func toggle() }
-
-protocol EnumStringValueConvertible {
-    var stringValue : String { get }
-}
-protocol EnumTextValueConvertible: EnumStringValueConvertible {
-    var textValue : String { get }
-}
