@@ -42,7 +42,7 @@ enum Api {
         switch self {
         case .Register(let username, let password, let code):
             return ApiPackage(
-                url: uncompletedUrl + Project.Network.Server.HTTP.route + "?act=member&op=register&access_token=token",
+                url: uncompletedUrl + Project.Network.Server.HTTP.route_old_sys + "?act=member&op=register&access_token=token",
                 params: [
                     ApiParameterKey.MobilePhoneNumber           : username,
                     ApiParameterKey.Password                    : password.md5(),
@@ -56,7 +56,7 @@ enum Api {
             )
         case .Login(let username, let password):
             return ApiPackage(
-                url: uncompletedUrl + Project.Network.Server.HTTP.route + "?act=member&op=login&access_token=token",
+                url: uncompletedUrl + Project.Network.Server.HTTP.route_old_sys + "?act=member&op=login&access_token=token",
                 params: [
                     ApiParameterKey.Username                    :   username,
                     ApiParameterKey.Password                    :   password.md5(),
@@ -69,7 +69,7 @@ enum Api {
             )
         case .Logout(let userID, let token):
             return ApiPackage(
-                url: uncompletedUrl + Project.Network.Server.HTTP.route + "?act=member&op=logout&access_token=token",
+                url: uncompletedUrl + Project.Network.Server.HTTP.route_old_sys + "?act=member&op=logout&access_token=token",
                 params: [
                     ApiParameterKey.ID                          : userID,
                     ApiParameterKey.Token                       : token,
@@ -81,7 +81,7 @@ enum Api {
             )
         case .RequestPhoneValidatingCode(let phone):
             return ApiPackage(
-                url: uncompletedUrl + Project.Network.Server.HTTP.route + "?access_token=token&act=member&op=getForgotCode",
+                url: uncompletedUrl + Project.Network.Server.HTTP.route_old_sys + "?access_token=token&act=member&op=getForgotCode",
                 params: [
                     ApiParameterKey.MobilePhoneNumber           : phone,
                     ApiParameterKey.AppType                     : ApiParameterKey.APP_TYPE_CGN
@@ -91,7 +91,7 @@ enum Api {
             )
         case .RetrievePassword(let phone, let validateCode, let newPassword):
             return ApiPackage(
-                url: uncompletedUrl + Project.Network.Server.HTTP.route + "?access_token=token&act=member&op=forgot",
+                url: uncompletedUrl + Project.Network.Server.HTTP.route_old_sys + "?access_token=token&act=member&op=forgot",
                 params: [
                     ApiParameterKey.MobilePhoneNumber           : phone,
                     ApiParameterKey.ValidateCodeNumber          : validateCode,
@@ -104,7 +104,7 @@ enum Api {
             )
         case .ChangePassword(let userID, let token, let password, let newPassword):
             return ApiPackage(
-                url: uncompletedUrl + Project.Network.Server.HTTP.route + "?access_token=token&act=member&op=changepassword",
+                url: uncompletedUrl + Project.Network.Server.HTTP.route_old_sys + "?access_token=token&act=member&op=changepassword",
                 params: [
                     ApiParameterKey.MemberID                    : userID,
                     ApiParameterKey.Token                       : token,
@@ -119,7 +119,7 @@ enum Api {
             )
         case .SubmitFeedback(let token, let content, let imageData):
             return ApiPackage(
-                url: uncompletedUrl + Project.Network.Server.HTTP.route + "?act=member_feedback&op=member_feedback_add&access_token=token",
+                url: uncompletedUrl + Project.Network.Server.HTTP.route_old_sys + "?act=member_feedback&op=member_feedback_add&access_token=token",
                 params: [
                     ApiParameterKey.Token               : token,
                     ApiParameterKey.ClientType          : ApiParameterKey.DEVICE_TYPE_iOS,
@@ -133,7 +133,7 @@ enum Api {
             )
         case .RequestAdBannerImagesURL:
             return ApiPackage(
-                url: uncompletedUrl + Project.Network.Server.HTTP.route + "?access_token=token&act=baseconf&op=get_pic_cofn",
+                url: uncompletedUrl + Project.Network.Server.HTTP.route_old_sys + "?access_token=token&act=baseconf&op=get_pic_cofn",
                 params: [
                     "bc_uses_type"  : 1,
                     "bc_type"       : 3
